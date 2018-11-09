@@ -141,12 +141,13 @@ class Validation
     public static function getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles)
     {
         $coverage = self::getCoveragesFromAPI();
-
+        $lineNo = 0;
+        //print_r($coverage);
+        //exit;
         foreach ($coverage as $coverVal) {
-            $coverTotal = $coverVal['miles'] + $currMileage;
-            $success = true;
-
-            if ($coverageName == $coverVal['name']) {
+            if ($coverVal['name'] == $coverageName) {
+                $coverTotal = $coverVal['miles'] + $currMileage;
+                $success = true;
                 //check mileage
                 if ($coverTotal >= 153000) {
                     $result[] = "Exceeds 153000 before contract expires";
@@ -170,15 +171,20 @@ class Validation
                     $result[] = "Miles expires before warranty";
                     $success = false;
                 }
+                
+                if ($success == true) {
+                    $rs = "SUCCESS";
+                } else {
+                    if (is_array($result)) {
+                        $resultPrint = implode("','", $result);
+                        $rs = "FAILURE: array(" . $resultPrint . ")";
+                    } else {
+                        $rs = "FAILURE";
+                    }
+                }
+                $rs .= " TTL M: " . $coverTotal . " TTL TERMS: " . $coverVal['terms'] . "<" . $baseTerm . "<br>";
+                return $rs;
             }
         }
-        if ($success == true) {
-            $rs = "SUCCESS";
-        } else {
-            $resultPrint = implode("','", $result);
-            $rs = "FAILURE: array(" . $resultPrint . ")";
-        }
-        $rs .= " TTL M: " . $coverTotal . "<br>";
-        return $rs;
     }
 }
