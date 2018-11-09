@@ -164,14 +164,8 @@ class Validation
                 }
 
                 //check term on coverage
-                if ($c['terms'] < $bwT) {
-                    $result[] = "Term expires before warranty";
-                    $success = false;
-                }
-
-                //check miles on coverage
-                if ($c['miles'] < $coverTotal) {
-                    $result[] = "Miles expires before warranty";
+                if ($c['terms'] > $bwT && $c['miles'] > $bwM) {
+                    $result[] = "Term and Miles expire before warranty";
                     $success = false;
                 }
                 
