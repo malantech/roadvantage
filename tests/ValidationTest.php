@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 use RoadVantage\Validation;
 
@@ -98,31 +99,47 @@ class ValidationTest extends TestCase
 
     /**
      * 
-     * $currMileage, $coverageName, $baseTerm, $baseMiles
+     * $yr, $currMileage, $coverageName, $baseTerm, $baseMiles
      */
     public function testGetCoverage1()
     {
+        $yr = 2006;
         $currMileage = 0;
         $coverageName = "3 Months/3,000 Miles";
         $baseTerm = 36;
-        $baseMiles = 100000;
-        $msg = "FAILURE: array('Age is > than 147 months before contract expires','Term expires before warranty')";
+        $baseMiles = 48000;
+        $msg = "SUCCESS";
 
-        $this->assertEquals($msg, Validation::getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles));
+        $this->assertEquals($msg, Validation::getCoverage($yr, $currMileage, $coverageName, $baseTerm, $baseMiles));
     }
 
     /**
-     * 
-     * $currMileage, $coverageName, $baseTerm, $baseMiles
+     * $yr, $currMileage, $coverageName, $baseTerm, $baseMiles
      */
     public function testGetCoverage2()
     {
-        $currMileage = 48000;
+        $yr = 2005;
+        $currMileage = 0;
         $coverageName = "3 Months/3,000 Miles";
         $baseTerm = 36;
         $baseMiles = 48000;
-        $msg = "FAILURE: array('Term expires before warranty','Miles expires before warranty')";
+        $msg = "FAILURE: array('Age is > than 147 months before contract expires (159)')";
 
-        $this->assertEquals($msg, Validation::getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles));
+        $this->assertEquals($msg, Validation::getCoverage($yr, $currMileage, $coverageName, $baseTerm, $baseMiles));
+    }
+
+    /**
+     * $yr, $currMileage, $coverageName, $baseTerm, $baseMiles
+     */
+    public function testGetCoverage3()
+    {
+        $yr = 2017;
+        $currMileage = 82000;
+        $coverageName = "120 Months/120,000 Miles";
+        $baseTerm = 36;
+        $baseMiles = 48000;
+        $msg = "FAILURE: array('Exceeds 153000 before contract expires')";
+
+        $this->assertEquals($msg, Validation::getCoverage($yr, $currMileage, $coverageName, $baseTerm, $baseMiles));
     }
 }

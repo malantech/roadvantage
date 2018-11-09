@@ -14,6 +14,10 @@ use DateTime;
 
 /**
  * Main validation class
+ * 
+ * @category Class
+ * @author   jmalan <mtech801@gmail.com>
+ * @link     http://customapplicationdesign.com *
  */
 class Validation
 {
@@ -72,6 +76,8 @@ class Validation
     /**
      * Get Age in Months of Vehicle
      * 
+     * @param int $year Year to test against
+     * 
      * @return age in months from year
      */
     public static function getAgeInMonths($year)
@@ -87,7 +93,11 @@ class Validation
     }
 
     /**
+     * Is the age of the vehicle valid?
      * 
+     * @param int $year Pass in the year of the vehicle to find out.
+     * 
+     * @return bool
      */
     public static function isAgeValid($year)
     {
@@ -98,7 +108,11 @@ class Validation
     }
 
     /**
+     * Get Suffix2 from array
      * 
+     * @param int $miles Miles to get the suffix2 value.
+     * 
+     * @return string $suff2 Returns the suffix2 from the array
      */
     public static function getSuffix2($miles = 0)
     {
@@ -114,18 +128,30 @@ class Validation
     }
 
     /**
+     * Is the vehicle new or used base on the warranty and the miles.
      * 
+     * @param int $miles               Miles of vehicle
+     * @param int $base_warranty_miles Miles of warranty qualification
+     * 
+     * @return string $status
      */
     public static function newOrUsedStatus($miles, $base_warranty_miles)
     {
+        $status = "USED";
+
         if ($miles < $base_warranty_miles) {
-            return "NEW";
+            $status = "NEW";
         }
-        return "USED";
+
+        return $status;
     }
 
     /**
+     * Is mileage under max mileage allowed
      * 
+     * @param int $mileage Mileage to check against
+     * 
+     * @return bool
      */
     public static function underMaxMileage($mileage)
     {
@@ -136,7 +162,15 @@ class Validation
     }
 
     /**
+     * Get the coverage.  This is where a lot of magic happens.
      * 
+     * @param int    $yr           Year 
+     * @param int    $currMileage  Current Mileage
+     * @param string $coverageName Coverage Name
+     * @param int    $bwM          Base Warranty Miles
+     * @param int    $bwT          Base Warranty Term
+     * 
+     * @return string $rs Result Status
      */
     public static function getCoverage($yr, $currMileage, $coverageName, $bwM, $bwT)
     {
