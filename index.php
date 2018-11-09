@@ -35,6 +35,7 @@ $base_warranty = [
 
 echo PHP_EOL . PHP_EOL;
 echo "Processing......" . PHP_EOL . PHP_EOL;
+$ln = 0;
 
 foreach ($base_warranty as $bw) {
     foreach ($years as $year => $yrArr) {
@@ -50,7 +51,9 @@ foreach ($base_warranty as $bw) {
                 echo "\t" . "suffix2:" . Validation::getSuffix2($miles);
                 $rs = Validation::getCoverage($yrArr['modelyear'], $miles, $coverageArr['name'], $bw['miles'], $bw['term']);
                 echo "\t" .  $rs;
+                echo " EOL" . $ln . "<br>";
                 echo PHP_EOL;
+                $ln++;
             }
             $miles += 1000;
         }
