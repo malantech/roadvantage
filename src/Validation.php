@@ -178,6 +178,7 @@ class Validation
             $resultPrint = implode("','", $result);
             $rs = "FAILURE: array(" . $resultPrint . ")";
         }
+        $rs .= " TTL M: " . $coverTotal . "<br>";
         return $rs;
     }
 }
