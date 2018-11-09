@@ -106,8 +106,9 @@ class ValidationTest extends TestCase
         $coverageName = "3 Months/3,000 Miles";
         $baseTerm = 36;
         $baseMiles = 100000;
+        $msg = "FAILURE: array('Age is > than 147 months before contract expires','Term expires before warranty')";
 
-        $this->assertEquals("SUCCESS", Validation::getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles));
+        $this->assertEquals($msg, Validation::getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles));
     }
 
     /**
@@ -120,7 +121,8 @@ class ValidationTest extends TestCase
         $coverageName = "3 Months/3,000 Miles";
         $baseTerm = 36;
         $baseMiles = 48000;
+        $msg = "FAILURE: array('Term expires before warranty','Miles expires before warranty')";
 
-        $this->assertEquals("SUCCESS", Validation::getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles));
+        $this->assertEquals($msg, Validation::getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles));
     }
 }

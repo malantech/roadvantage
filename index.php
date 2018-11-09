@@ -36,19 +36,19 @@ $base_warranty = [
 echo PHP_EOL . PHP_EOL;
 echo "Processing......" . PHP_EOL . PHP_EOL;
 
-foreach ($base_warranty as $vehicle) {
+foreach ($base_warranty as $bw) {
     foreach ($years as $year => $yrArr) {
         $miles = 0;
         while ( $miles <= 150000 ) {
             foreach (Validation::getCoveragesFromAPI() as $coverageArr) {
-                echo $vehicle[ "make" ];
+                echo $bw[ "make" ];
                 echo "\t" . $yrArr['modelyear'];
                 echo "\t" . $miles;
-                echo "\t" . Validation::newOrUsedStatus($miles, $vehicle[ 'miles' ]);
+                echo "\t" . Validation::newOrUsedStatus($miles, $bw['miles']);
                 echo "\t" . $coverageArr['name'];
                 echo "\t" . "suffix1:" . sprintf("%02d", $yrArr['suffix1']);
                 echo "\t" . "suffix2:" . Validation::getSuffix2($miles);
-                $rs = Validation::getCoverage($miles, $coverageArr['name'], $vehicle['term'], $vehicle['miles']);
+                $rs = Validation::getCoverage($yrArr['modelyear'], $miles, $coverageArr['name'], $bw['miles'], $bw['term']);
                 echo "\t" .  $rs;
                 echo PHP_EOL;
             }

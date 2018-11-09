@@ -138,15 +138,16 @@ class Validation
     /**
      * 
      */
-    public static function getCoverage($currMileage, $coverageName, $baseTerm, $baseMiles)
+    public static function getCoverage($yr, $currMileage, $coverageName, $bwM, $bwT)
     {
         $coverage = self::getCoveragesFromAPI();
         $lineNo = 0;
+        $age = self::getAgeInMonths($yr);
         //print_r($coverage);
         //exit;
-        foreach ($coverage as $coverVal) {
-            if ($coverVal['name'] == $coverageName) {
-                $coverTotal = $coverVal['miles'] + $currMileage;
+        foreach ($coverage as $c) {
+            if ($c['name'] == $coverageName) {
+                $coverTotal = $c['miles'] + $currMileage;
                 $success = true;
                 //check mileage
                 if ($coverTotal >= 153000) {
@@ -154,20 +155,23 @@ class Validation
                     $success = false;
                 }
 
+                //$coverTotal < $bwM
+
                 //check age
-                if ($coverTotal < $baseMiles) {
-                    $result[] = "Age is > than 147 months before contract expires";
+                $chkAge = $age + $c['terms'];
+                if ($chkAge > 147) {
+                    $result[] = "Age is > than 147 months before contract expires (" . $chkAge . ")";
                     $success = false;
                 }
 
                 //check term on coverage
-                if ($coverVal['terms'] < $baseTerm) {
+                if ($c['terms'] < $bwT) {
                     $result[] = "Term expires before warranty";
                     $success = false;
                 }
 
                 //check miles on coverage
-                if ($coverVal['miles'] < $coverTotal) {
+                if ($c['miles'] < $coverTotal) {
                     $result[] = "Miles expires before warranty";
                     $success = false;
                 }
@@ -177,12 +181,13 @@ class Validation
                 } else {
                     if (is_array($result)) {
                         $resultPrint = implode("','", $result);
-                        $rs = "FAILURE: array(" . $resultPrint . ")";
+                        $rs = "FAILURE: array('" . $resultPrint . "')";
                     } else {
                         $rs = "FAILURE";
                     }
                 }
-                $rs .= " TTL M: " . $coverTotal . " TTL TERMS: " . $coverVal['terms'] . "<" . $baseTerm . "<br>";
+                $rs .= "\nAge(" . $yr . "): " . $age . "\n" . $c['name'] . "\n" . $coverageName . "\n\n";
+                //$rs .= " TTL M: " . $coverTotal . " TTL TERMS: " . $c['terms'] . "<" . $baseTerm . "<br>";
                 return $rs;
             }
         }
