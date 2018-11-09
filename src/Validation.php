@@ -186,7 +186,9 @@ class Validation
                         $rs = "FAILURE";
                     }
                 }
-                $rs .= "\nAge(" . $yr . "): " . $age . "\n" . $c['name'] . "\n" . $coverageName . "\n\n";
+                $lineNo++;
+                $rs .= " EOL" . $lineNo . "<br>";
+                //$rs .= "\nAge(" . $yr . "): " . $age . "\n" . $c['name'] . "\n" . $coverageName . "\n\n";
                 //$rs .= " TTL M: " . $coverTotal . " TTL TERMS: " . $c['terms'] . "<" . $baseTerm . "<br>";
                 return $rs;
             }
