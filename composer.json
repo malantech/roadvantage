@@ -1,11 +1,12 @@
 {
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
     "require": {
         "phpunit/phpunit": "^7.4",
         "squizlabs/php_codesniffer": "^3.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
     }
+    
 }
