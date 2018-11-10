@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Vehicle Validation Class Document
  *
@@ -6,8 +7,9 @@
  * @package  VersionOne
  * @author   Joshua Malan <mtech801@gmail.com>
  * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
- * @link     http://customapplicationdesign.com *
+ * @link     http://customapplicationdesign.com
  */
+
 namespace RoadVantage;
 
 use DateTime;
@@ -16,8 +18,10 @@ use DateTime;
  * Main validation class
  * 
  * @category Class
- * @author   jmalan <mtech801@gmail.com>
- * @link     http://customapplicationdesign.com *
+ * @package  VersionOne
+ * @author   Joshua Malan <mtech801@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://customapplicationdesign.com
  */
 class Validation
 {
@@ -193,7 +197,7 @@ class Validation
                 //check age
                 $chkAge = $age + $c['terms'];
                 if ($chkAge > 147) {
-                    $result[] = "Age is > than 147 months before contract expires (" . $chkAge . ")";
+                    $result[] = "Age is > than 147 months before contract expires";
                     $success = false;
                 }
 

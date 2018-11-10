@@ -1,10 +1,16 @@
 <?php
 
+/**
+ * Unit test for Validation Class
+ * 
+ * @author jmalan <mtech801@gmail.com>
+ */
+
 use PHPUnit\Framework\TestCase;
 use RoadVantage\Validation;
 
 /**
- * 
+ * Complete PHPUnit testing class for items in src/Validation.php
  */
 class ValidationTest extends TestCase
 {
@@ -38,7 +44,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing for the issue_mileage array to make sure it is there and has 13 records
      */
     public function testGetIssueMileage()
     {
@@ -47,7 +53,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing for age in months based off year
      */
     public function testGetAgeInMonths()
     {
@@ -63,7 +69,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing for age validation
      */
     public function testIsAgeValid()
     {
@@ -72,7 +78,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing for suffix2 validation
      */
     public function testGetSuffix2()
     {
@@ -80,7 +86,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing for NEW or USED status
      */
     public function testNewOrUsedStatus()
     {
@@ -89,7 +95,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing the under and over mileage function
      */
     public function testUnderMaxMileage()
     {
@@ -98,7 +104,7 @@ class ValidationTest extends TestCase
     }
 
     /**
-     * 
+     * Testing for coverage based off criteria supplied in testing function
      * $yr, $currMileage, $coverageName, $baseTerm, $baseMiles
      */
     public function testGetCoverage1()
@@ -114,6 +120,7 @@ class ValidationTest extends TestCase
     }
 
     /**
+     * Testing for coverage based off criteria supplied in testing function
      * $yr, $currMileage, $coverageName, $baseTerm, $baseMiles
      */
     public function testGetCoverage2()
@@ -129,6 +136,7 @@ class ValidationTest extends TestCase
     }
 
     /**
+     * Testing for coverage based off criteria supplied in testing function
      * $yr, $currMileage, $coverageName, $baseTerm, $baseMiles
      */
     public function testGetCoverage3()

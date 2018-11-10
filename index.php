@@ -1,4 +1,14 @@
 <?php
+/**
+ * Vehicle Validation Class Document
+ *
+ * @category Class
+ * @package  VersionOne
+ * @author   Joshua Malan <mtech801@gmail.com>
+ * @license  http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @link     http://customapplicationdesign.com
+ */
+
 ini_set('memory_limit', -1);
 ini_set('max_execution_time', 0); //No Limit
 
@@ -51,7 +61,7 @@ foreach ($base_warranty as $bw) {
                 echo "\t" . "suffix2:" . Validation::getSuffix2($miles);
                 $rs = Validation::getCoverage($yrArr['modelyear'], $miles, $coverageArr['name'], $bw['miles'], $bw['term']);
                 echo "\t" .  $rs;
-                echo " EOL" . $ln . "<br>";
+                //echo " EOL" . $ln . "<br>";
                 echo PHP_EOL;
                 $ln++;
             }
